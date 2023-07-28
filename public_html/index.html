@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <title>Crash test</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <button id="teste">Brute Force!</button>
+        <!--script src="gpu-browser.min.js"></script-->
+        <script>
+            document.getElementById('teste').addEventListener('click', () => {
+                for (let i = 0; i <= 2; i++) {
+                    let worker = new Worker('worker.js');
+                    // Para testar!
+                    // Pegue a seed que acabou de ser gerada no Crash, jogue aqui,
+                    // clique em brute force e veja no console se ele acertou o próximo...
+                    let seed = '7e7111a03092f8106bd389b532c4d33198aa00758b92668043acc11269a82b4b'
+                    worker.postMessage({id: i, cmd: 'bruteforce', seed: seed});
+                    worker.addEventListener('message', (e) => {
+                        console.log(e.data);
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
